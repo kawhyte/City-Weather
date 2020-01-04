@@ -251,7 +251,7 @@ function setGreeting(hour) {
     console.log(background_image)
      //background_image.style.background = `url(/img/tomato.svg) no-repeat center/cover;`
   } else if (hour < 18) {
-    document.getElementById("bg").style.background = "url('/img/background_night.svg') center/cover"
+    document.getElementById("bg").style.background = "url('/img/city_night.svg') center/cover"
 
     // greeting.textContent = "Good afternoon!";
     // mainIcon.src = `img/post-meridiem.svg`
