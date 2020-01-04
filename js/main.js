@@ -17,7 +17,7 @@ const newTime = document.querySelector(".new-time");
 window.addEventListener("load", () => {
   let long, lat;
   const proxy = "https://cors-anywhere.herokuapp.com/";
-  let api = `${proxy}https://api.darksky.net/forecast/148e03bac53ba45c90e6d64486bc1e62/39.530895,-119.814972`;
+  //let api = `${proxy}https://api.darksky.net/forecast/148e03bac53ba45c90e6d64486bc1e62/39.530895,-119.814972`;
 
   // if (navigator.geolocation) {
   //   navigator.geolocation.getCurrentPosition(position => {
@@ -44,6 +44,7 @@ window.addEventListener("load", () => {
       temperatureDegree.textContent = Math.round(temperature);
       temperatureDescription.textContent = summary;
       locationTimezone.textContent = data.timezone;
+      console.log("time" + time)
       console.log(time * 1000)
 
       // Time
@@ -53,14 +54,15 @@ window.addEventListener("load", () => {
       console.log(time);
       console.log(localTime);
       console.log(hour +":"+ minutes)
+      setGreeting(hour);
       // 12 Format
       hour = hour % 12 || 12;
-      console.log(hour);
+      console.log("Hour:" + hour);
       newTime.innerHTML = `${hour}<span>:</span>${minutes} <span>${
         hour < 12 ? " AM" : " PM"
       }</span>`;
 
-      setGreeting(hour);
+      
 
 
       console.log(icon);
@@ -244,13 +246,13 @@ function setGreeting(hour) {
   //let today = new Date();
   //let hour = today.getHours();
  console.log("From Greeting: "+ hour);
-  if (hour < 12) {
+  if (hour <= 12) {
     // greeting.textContent = "Good morning!";
     document.getElementById("bg").style.background = "url('/img/clear_blue_sky.svg') center/cover"
    
     console.log(background_image)
      //background_image.style.background = `url(/img/tomato.svg) no-repeat center/cover;`
-  } else if (hour < 18) {
+  } else if (hour > 12 && hour < 18) {
     document.getElementById("bg").style.background = "url('/img/city_night.svg') center/cover"
 
     // greeting.textContent = "Good afternoon!";
