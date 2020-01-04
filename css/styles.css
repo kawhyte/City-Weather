@@ -1,0 +1,124 @@
+body {
+    font-family: Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    background: black;
+    color: rgb(255, 255, 255);
+}
+
+
+.location {
+    height: 10vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-height: 80px;
+    min-height: 80px;
+    border-style: solid;
+    border-color: rgb(38, 207, 4);
+
+}
+
+.time-location {
+    height: 11vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    border-style: solid;
+    border-color: rgb(222, 226, 5);
+    flex-direction: column;
+    max-height: 50px;
+    min-height: 20px;
+
+}
+.time-section {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    border-style: dotted;
+    border-color: blueviolet;
+}
+
+.time-section img {
+    z-index: 10;
+}
+
+.temperature {
+    height: 10vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    max-height: 80px;
+    min-height: 80px;
+    border-style: solid;
+    border-color: rgb(38, 207, 4);
+    flex-direction: column;
+}
+#skycon-img {
+    width: 8%;
+}
+
+
+
+.degree-section {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    border-style: solid;
+    border-color: blueviolet;
+    height: 150px;
+}
+
+.degree-section span {
+    margin-left: 5px;
+    margin-right: 35px;
+   
+    font-size: 20px;
+}
+
+
+.greetings {
+    display: flex;
+    justify-content: center;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 0rem;
+    margin-top: 2rem;
+    border-style: solid;
+    border-color: red;
+}
+
+.greetings p {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top:.5rem ;
+    margin-right: 1rem; 
+    margin-bottom: 0rem;
+}
+
+.greetings span {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    /* margin-top: 5rem; */
+}
+.container{
+
+    border-style: dotted;
+    border-color: red;
+   
+}
+.temperature-decription{
+
+    margin-top: 20px;
+}
+
+.snow{
+    z-index: 10;
+    position: absolute;
+    height: 97vh;
+    width: 78vw;
+    display:block; 
+    overflow: hidden;
+}
