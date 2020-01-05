@@ -7,6 +7,8 @@
         <title>City Map</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script defer type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCupHbdBIWGhHwxkNZdURt3IQCkIE_PiT0&libraries=places"></script>
+        <script defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/skycons/1396634940/skycons.min.js"></script>
         <link rel="stylesheet" href="styles.css">
         <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css" />
       </head>
@@ -26,14 +28,14 @@
     <div class="greetings white-90">
 
         <div class="ph3">
-          <h1 class="helvetica white f6 fw6 ttu tracked">Select a Location:</h1>
-          <a class="f6 link dim br-pill ph3 pv2 mb2 dib white bg-dark-gray" href="#0">Miami, FL</a>
+          <h1 class="helvetica white f6 fw6 ttu tracked">Find a Location:</h1>
+          <!-- <a class="f6 link dim br-pill ph3 pv2 mb2 dib white bg-dark-gray" href="#0">Miami, FL</a>
           <a class="f6 link dim br-pill ph3 pv2 mb2 dib white bg-dark-gray" href="#0">Williston, N. Dak.</a>
           <a class="f6 link dim br-pill ph3 pv2 mb2 dib white bg-dark-gray" href="#0">San Fransico, CA</a>
-          <a class="f6 link dim br-pill ph3 pv2 mb2 dib white bg-dark-gray" href="#0">Apocalyptic City</a>
-        </div>
-        <div class="city-search-container">
-          <input type="text" class="city-sesrch" placeholder="Enter Location">
+          <a class="f6 link dim br-pill ph3 pv2 mb2 dib white bg-dark-gray" href="#0">Apocalyptic City</a> -->
+          <div class="city-search-container">
+            <input type="text" class="city-sesrch" data-city-search placeholder="Enter Location">
+          </div>
         </div>
       </div>
   </header>
@@ -47,18 +49,41 @@
           
             
             <div class="degree-section f2 f1-l lh-title mt0 mb4 mb2-ns">
-                <h2 class="temperature-degree">34</h2>
-                <span>F</span>
-                <canvas id="skycon-img" class="icon" width="128" height="128"></canvas>
+
+                
+                <h2 class="temperature-degree" data-temperature>TBD</h2>
+                <!-- <span>F</span> -->
+                        <div class="icon-container">
+                            <canvas id="icon" width="100" height="100"></canvas>
+                          </div>
+                <!-- <canvas id="skycon-img" class="icon" width="128" height="128"></canvas> -->
             </div>
             
             <div class="time-location f4 mt0 mb3 mb2-ns">
-                <div class="temperature-decription">It's cold</div>
+
+                <div class="temperature-decription" data-status>TBD</div>
                 <div class="">
-                  <h3 class="new-time white-90">Retrieving Time...</h3>
+                  <h3 class="new-time white-90" data-time>Retrieving Time...</h3>
                 </div>
-                <div class="h1 location-timezone">Retrieving Location...</div>
+                <div class="h1 location-timezone" data-location>TBD</div>
             </div>
+<br>
+<br><br><br><br>
+
+            <div class="detail-section">
+                <div class="detail">
+                  <div class="title">Wind</div>
+                  <div class="value" data-wind>TBD</div>
+                </div>
+              
+                <div class="detail">
+                  <div class="title">Precipitation</div>
+                  <div class="value" data-precipitation>TBD</div>
+                </div>
+              </div>
+
+
+
    
         </div>
         <canvas class="snow" id="sky"> </canvas>
@@ -86,7 +111,7 @@
             <div class="tc mt3">
               <a href="https://darksky.net/poweredby" title="Language" class="f6 dib ph2 link mid-gray dim">Powered By Dark Sky</a>
               <a href="https://www.freepik.com/"    title="Terms" class="f6 dib ph2 link mid-gray dim">SVG by freepik.com</a>
-              <a href="/privacy/"  title="Privacy" class="f6 dib ph2 link mid-gray dim">Privacy</a>
+              <!-- <a href="/privacy/"  title="Privacy" class="f6 dib ph2 link mid-gray dim">Privacy</a> -->
             </div> 
 
           </footer>
