@@ -13,8 +13,8 @@ body {
     align-items: center;
     max-height: 80px;
     min-height: 80px;
-    border-style: solid;
-    border-color: rgb(38, 207, 4);
+    /* border-style: solid;
+    border-color: rgb(38, 207, 4); */
 
 }
 
@@ -23,8 +23,8 @@ body {
     display: flex;
     justify-content: space-around;
     align-items: flex-start;
-    border-style: solid;
-    border-color: rgb(222, 226, 5);
+    /* border-style: solid;
+    border-color: rgb(222, 226, 5); */
     flex-direction: column;
     max-height: 50px;
     min-height: 20px;
@@ -34,8 +34,8 @@ body {
     display: flex;
     align-items: center;
     cursor: pointer;
-    border-style: dotted;
-    border-color: blueviolet;
+    /* border-style: dotted;
+    border-color: blueviolet; */
 }
 
 .time-section img {
@@ -49,8 +49,8 @@ body {
     align-items: flex-start;
     max-height: 80px;
     min-height: 80px;
-    border-style: solid;
-    border-color: rgb(38, 207, 4);
+    /* border-style: solid;
+    border-color: rgb(38, 207, 4); */
     flex-direction: column;
 }
 #skycon-img {
@@ -63,8 +63,8 @@ body {
     display: flex;
     align-items: center;
     cursor: pointer;
-    border-style: solid;
-    border-color: blueviolet;
+    /* border-style: solid;
+    border-color: blueviolet; */
     height: 150px;
 }
 
@@ -84,8 +84,8 @@ body {
     text-align: center;
     margin-bottom: 0rem;
     margin-top: 1rem;
-    border-style: dotted;
-    border-color: red;
+    /* border-style: dotted;
+    border-color: red; */
 }
 
 .greetings p {
@@ -101,12 +101,13 @@ body {
     justify-content: center;
     align-items: center;
     text-align: center;
-    /* margin-top: 5rem; */
+   
 }
 .container {
     position: relative;
-    border-style: dotted;
-    border-color: red;
+    border-radius: 25px;
+    /* border-style: dotted;
+    border-color: red; */
    
 }
 .temperature-decription{
@@ -123,29 +124,8 @@ body {
 .snow {
     /* z-index: 22; */
     position: absolute;
-    border-style: dotted;
-    border-color: pink;
-    background-color:rgba(255,0,0,0.3);
+    /* background-color:rgba(255,0,0,0.3); */
     width:100%;
     height:100%
-    /* height: 55vh;
-    width: 89vw;
-    display:block; 
-    overflow: hidden; 
-    border-style: dotted;
-    border-color: pink;
-    max-width: 1400px;
-    max-height: 400px; */
 }
 
-/* .canv {
-    position: absolute;
-    height: 60%;
-    width: 60%;
-    } */
-    .img {
-    position: absolute;
-    height: 50%;
-    width: 50%;
-    border: 1px solid black;
-    }
