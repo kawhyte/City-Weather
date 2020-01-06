@@ -22,6 +22,15 @@ app.post('/weather', (req, res) => {
 
 });
 
-app.listen(4000, () => {
-  console.log("Server Ready on port 4000...");
-});
+
+
+let port = process.env.PORT;
+if (port == null || port == "") {
+  console.log("Server Ready on port 8000...");
+  port = 8000;
+}
+app.listen(port);
+
+// app.listen(4000, () => {
+//   console.log("Server Ready on port 4000...");
+// });
