@@ -16,58 +16,177 @@ const temperatureSpan = document.querySelector(".temperature span");
 const temperatureF = document.querySelector(".degree-section > span");
 const newTime = document.querySelector(".new-time");
 
-// Google API
-const searchElement = document.querySelector("[data-city-search]");
-const searchBox = new google.maps.places.SearchBox(searchElement); 
-searchBox.addListener("places_changed", () => {
-
-  const place = searchBox.getPlaces()[0];
-
-  if (place == null) {
-    return;
-  }
-  const latitude = place.geometry.location.lat();
-  const longitude = place.geometry.location.lng();
-
-  fetch("/weather", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json"
-    },
-    body: JSON.stringify({
-      latitude: latitude,
-      longitude: longitude
-    })
-  })
-    .then(res => res.json())
-    .then(data => {
-      console.log(data);
-      setWeatherData(data, place.formatted_address);
-    });
-});
-
-const icon = new Skycons({ color: "#FFF" });
-const locationElement = document.querySelector("[data-location]");
-const statusElement = document.querySelector("[data-status]");
-const temperatureElement = document.querySelector("[data-temperature]");
-const precipitationElement = document.querySelector("[data-precipitation]");
-const windElement = document.querySelector("[data-wind]");
-const timeElement = document.querySelector("[data-time]");
-icon.set("icon", "clear-day");
-icon.play();
-
-function setWeatherData(data, place) {
-  locationElement.textContent = place;
-  statusElement.textContent = data.summary;
-  temperatureElement.textContent = data.temperature;
-  precipitationElement.textContent = `${data.precipProbability * 100}%`;
-  windElement.textContent = data.windSpeed;
-  //timeElement.textContent = converTime(data.time);
-  icon.set("icon", data.icon);
-  icon.play();
+function defaultValue() {
+  
+  document.getElementById("bg").style.background = "url('./img/sunset_bg.svg') center/cover"
 }
 
+window.onload = defaultValue;
+
+
+document.addEventListener("DOMContentLoaded", function() {
+  // Google API
+  const searchElement = document.querySelector("[data-city-search]");
+  const searchBox = new google.maps.places.SearchBox(searchElement);
+  searchBox.addListener("places_changed", () => {
+    const place = searchBox.getPlaces()[0];
+
+    if (place == null) {
+      console.log("place is null");
+      return;
+    }
+
+
+    const latitude = place.geometry.location.lat();
+    const longitude = place.geometry.location.lng();
+
+    fetch("/weather", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify({
+        latitude: latitude,
+        longitude: longitude
+      })
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        setWeatherData(data, place.formatted_address);
+      });
+
+    searchElement.value = null;
+  });
+
+  const icon = new Skycons({ color: "#FFF" });
+  const locationElement = document.querySelector("[data-location]");
+  const statusElement = document.querySelector("[data-status]");
+  const temperatureElement = document.querySelector("[data-temperature]");
+  const precipitationElement = document.querySelector("[data-precipitation]");
+  const windElement = document.querySelector("[data-wind]");
+  const timeElement = document.querySelector("[data-time]");
+  const humidityElement = document.querySelector("[data-humidity]");
+  icon.set("icon", "clear-day");
+  icon.play();
+
+  function setWeatherData(data, place) {
+    locationElement.textContent = place;
+    temperatureElement.textContent = data.temperature;
+    precipitationElement.textContent = `${data.precipProbability * 100}%`;
+    windElement.textContent = data.windSpeed;
+    humidityElement.textContent = data.humidity;
+
+    statusElement.textContent = data.summary;
+
+    console.log(wordInString(data.summary, "cloudy"));
+
+    //timeElement.textContent = converTime(data.time);
+    icon.set("icon", data.icon);
+    icon.play();
+
+    //Build weather condition
+    if (wordInString(data.summary, "snow")) {
+      //setInterval(drawFlakes, 30);
+    } else if (wordInString(data.summary, "rain")) {
+      makeItRain();
+    } else if (wordInString(data.summary, "sunny")) {
+      makeItRain();
+    } else if (wordInString(data.summary, "cloudy")) {
+      makeItRain();
+    } else {
+      makeItRain();
+    }
+
+    setGreeting(15);
+  }
+
+  function wordInString(s, word) {
+    return new RegExp("\\b" + word + "\\b", "i").test(s);
+  }
+
+  //RAIN//
+  function makeItRain() {
+    canvas = document.getElementById("sky");
+    W = window.innerWidth;
+    H = window.innerHeight;
+    canvas.width = W;
+    canvas.height = H;
+    if (canvas.getContext) {
+      ctx = canvas.getContext("2d");
+      var w = canvas.width;
+      var h = canvas.height;
+      ctx.strokeStyle = "rgba(174,194,224,0.5)";
+      ctx.lineWidth = 1;
+      ctx.lineCap = "round";
+      var init = [];
+      var maxParts = 1000;
+      for (var a = 0; a < maxParts; a++) {
+        init.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          l: Math.random() * 1,
+          xs: -4 + Math.random() * 4 + 2,
+          ys: Math.random() * 10 + 10
+        });
+      }
+      var particles = [];
+      for (var b = 0; b < maxParts; b++) {
+        particles[b] = init[b];
+      }
+      function draw() {
+        ctx.clearRect(0, 0, w, h);
+        for (var c = 0; c < particles.length; c++) {
+          var p = particles[c];
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(p.x + p.l * p.xs, p.y + p.l * p.ys);
+          ctx.stroke();
+        }
+        move();
+      }
+      function move() {
+        for (var b = 0; b < particles.length; b++) {
+          var p = particles[b];
+          p.x += p.xs;
+          p.y += p.ys;
+          if (p.x > w || p.y > h) {
+            p.x = Math.random() * w;
+            p.y = -20;
+          }
+        }
+      }
+      setInterval(draw, 30);
+    }
+  }
+  //RAIN END//
+
+
+// //set background
+  function setGreeting(hour) {
+    //let today = new Date();
+    //let hour = today.getHours();
+   console.log("From Greeting: "+ hour);
+    if (hour <= 12) {
+      // greeting.textContent = "Good morning!";
+      document.getElementById("bg").style.background = "url('./img/clear_blue_sky.svg') center/cover" //"url('/public/img/clear_blue_sky.svg') center/cover"
+      console.log(background_image)
+       //background_image.style.background = `url(/img/tomato.svg) no-repeat center/cover;`
+    } else if (hour > 12 && hour < 18) {
+      document.getElementById("bg").style.background = "url('./img/city_night.svg') center/cover"//"url('/public/img/city_night.svg') center/cover"
+      // greeting.textContent = "Good afternoon!";
+      // mainIcon.src = `img/post-meridiem.svg`
+    } else {
+      document.getElementById("bg").style.background = "url('./img/sunset_bg.svg') center/cover" //"url('/public/img/background_night.svg') center/cover"
+      // greeting.textContent = "Good evening!";
+      // mainIcon.src = `img/post-meridiem_evening.svg`
+    }
+  }
+
+
+
+});
 // function converTime (localTime) {
 
 //       // Time
@@ -77,7 +196,7 @@ function setWeatherData(data, place) {
 //       console.log(time);
 //       console.log(localTime);
 //       console.log(hour +":"+ minutes)
-      
+
 //       //setGreeting(hour);
 //       // 12 Format
 //       hour = hour % 12 || 12;
@@ -400,34 +519,34 @@ function addZero(n) {
 // }
 
 //Get focus
-async function getMantra() {
-  const response = await fetch("quotes.json");
-  const myJson = await response.json();
-  const myJsonSize = JSON.stringify(myJson).length;
-  //console.log(myJsonSize);
-  num = Math.floor(Math.random() * Math.floor(100));
-  //console.log(num);
+// async function getMantra() {
+//   const response = await fetch("quotes.json");
+//   const myJson = await response.json();
+//   const myJsonSize = JSON.stringify(myJson).length;
+//   //console.log(myJsonSize);
+//   num = Math.floor(Math.random() * Math.floor(100));
+//   //console.log(num);
 
-  if (myJson[num].text === null || myJson[num].from === null) {
-    quote.textContent =
-      "A hero is one who knows how to hang on for one minute longer.";
-    author.textContent = "Norwegian proverb";
-  } else {
-    quote.textContent = myJson[num].text;
-    author.textContent = myJson[num].from;
-  }
-  //   if ( === null || mantraData.text) {
-  //     mantra.textContent = "Inhale love. Exhale gratitude.";
-  //   } else {
+//   if (myJson[num].text === null || myJson[num].from === null) {
+//     quote.textContent =
+//       "A hero is one who knows how to hang on for one minute longer.";
+//     author.textContent = "Norwegian proverb";
+//   } else {
+//     quote.textContent = myJson[num].text;
+//     author.textContent = myJson[num].from;
+//   }
+//   if ( === null || mantraData.text) {
+//     mantra.textContent = "Inhale love. Exhale gratitude.";
+//   } else {
 
-  //var json = JSON.parse(myJson);
+//var json = JSON.parse(myJson);
 
-  //console.log(myJson);
-  // console.log(JSON.stringify(myJson[num].from));
-  //console.log(JSON.stringify(myJson).length);
+//console.log(myJson);
+// console.log(JSON.stringify(myJson[num].from));
+//console.log(JSON.stringify(myJson).length);
 
-  //}
-}
+//}
+//}
 
 //name.addEventListener("keypress", setName);
 //name.addEventListener("blur", setName);
@@ -435,7 +554,7 @@ async function getMantra() {
 // focus.addEventListener("blur", setFocus);
 
 //run
-getMantra();
+//getMantra();
 // setAMPM();
 // getFocus();
 // showTime();
