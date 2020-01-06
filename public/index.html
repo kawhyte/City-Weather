@@ -1,128 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>City Map</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <script async defer type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCupHbdBIWGhHwxkNZdURt3IQCkIE_PiT0&libraries=places"></script>
-        <script defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/skycons/1396634940/skycons.min.js"></script>
-        <link rel="stylesheet" href="styles.css">
-        <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css" />
-      </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>City Map</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script async defer type="text/javascript"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCupHbdBIWGhHwxkNZdURt3IQCkIE_PiT0&libraries=places">
+    </script>
+    <script defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/skycons/1396634940/skycons.min.js">
+    </script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css" />
+</head>
+
 <body>
 
- <!-- <canvas class="snow" id="sky"> </canvas> -->
- <header>
-    <div class="location">
-
-      <h1 class="cf pa3 pa4-m pa5-l mw9 center white-90 center">City Weather</h1>
-      <div class="temperature">
-
-      </div>
-    </div>
-
-
-    <div class="greetings white-90">
-
-        <div class="ph3">
-          <h1 class="helvetica white f6 fw6 ttu tracked">Find a Location:</h1>
-          <!-- <a class="f6 link dim br-pill ph3 pv2 mb2 dib white bg-dark-gray" href="#0">Miami, FL</a>
-          <a class="f6 link dim br-pill ph3 pv2 mb2 dib white bg-dark-gray" href="#0">Williston, N. Dak.</a>
-          <a class="f6 link dim br-pill ph3 pv2 mb2 dib white bg-dark-gray" href="#0">San Fransico, CA</a>
-          <a class="f6 link dim br-pill ph3 pv2 mb2 dib white bg-dark-gray" href="#0">Apocalyptic City</a> -->
-          <div class="city-search-container">
-            <input type="text" class="city-sesrch" data-city-search placeholder="Enter Location">
-          </div>
+    <!-- <canvas class="snow" id="sky"> </canvas> -->
+    <header>
+        <div class="location">
+            <h2 class="f2 f1-m  measure-narrow  mv0 center">
+                <span class="md-yellow-90  lh-copy white pa2 tracked-tight">
+                    Animated City Weather
+                </span>
+            </h2>
+             <!-- <h1 class="f2 fw7 ttu tracked lh-title mt0 mb3 avenir center">Animated City Weather</h1> -->
         </div>
-      </div>
-  </header>
+
+
+        <div class="greetings white-90">
+
+            <div class="ph4">
+                <h1 class="helvetica white f5 fw5 ttu tracked">Enter a Location:</h1>
+                <div class="city-search-container">
+                    <!-- <input type="text" class="city-sesrch" data-city-search placeholder="example:"> -->
+
+                    <form class="pa2 black-80">
+                        <div class="measure">
+                            <!-- <label for="name" class="f6 b db mb2">Name <span class="normal black-60">(optional)</span></label> -->
+                            <input id="name" class="input-reset ba -20 pa2 mb2 db w-100" type="text"
+                                data-city-search placeholder="ex. Reno" aria-describedby="name-desc">
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </header>
 
 
 
     <main class="cf pa3 pa4-m pa5-l mw9 center">
         <div class="container helvetica " id="bg">
-            
+
             <div class="fr w-100 w-80-l">
-          
-            
-            <div class="degree-section f2 f1-l lh-title mt0 mb4 mb2-ns">
 
-                
-                <h2 class="temperature-degree" data-temperature>TBD</h2>
-                <!-- <span>F</span> -->
-                        <div class="icon-container">
-                            <canvas id="icon" width="100" height="100"></canvas>
-                          </div>
-                <!-- <canvas id="skycon-img" class="icon" width="128" height="128"></canvas> -->
+
+                <div class="degree-section f2 f1-l lh-title mt0 mb4 mb2-ns">
+
+
+                    <h2 class="temperature-degree" data-temperature>TBD</h2>
+                    <!-- <span>F</span> -->
+                    <div class="icon-container">
+                        <canvas id="icon" width="100" height="100"></canvas>
+                    </div>
+                    <!-- <canvas id="skycon-img" class="icon" width="128" height="128"></canvas> -->
+                </div>
+
+                <div class="time-location f4 mt0 mb3 mb2-ns">
+
+                    <!-- <div class="temperature-decription" >TBD</div> -->
+                    <div class="">
+                        <!-- <div class="h3 location-timezone" >TBD</div> -->
+                        <!-- <h3 class="new-time white-90" data-time>Retrieving Time...</h3> -->
+                    </div>
+
+
+                    <h3 class="f6 ttu tracked" data-status>Hot as hell</h3>
+                    <div class="cf">
+                        <dl class="fl fn-l w-50 dib-l w-auto-l lh-title mr5-l">
+                            <dd class="f6 fw4 ml0"> Current Location</dd>
+                            <dd class="f3 fw6 ml0" data-location>Jamaica, WI</dd>
+                        </dl>
+                        <dl class="fl fn-l w-50 dib-l w-auto-l lh-title mr5-l">
+                            <dd class="f6 fw4 ml0">Wind Speed</dd>
+                            <dd class="f3 fw6 ml0" data-wind>100</dd>
+                        </dl>
+                        <dl class="fl fn-l w-50 dib-l w-auto-l lh-title mr5-l">
+                            <dd class="f6 fw4 ml0">Precipitation</dd>
+                            <dd class="f3 fw6 ml0" data-precipitation>99%</dd>
+                        </dl>
+                        <dl class="fl fn-l w-50 dib-l w-auto-l lh-title mr5-l">
+                            <dd class="f6 fw4 ml0">Humidity</dd>
+                            <dd class="f3 fw6 ml0">0.4</dd>
+                        </dl>
+
+                    </div>
+                </div>
+
+
             </div>
-            
-            <div class="time-location f4 mt0 mb3 mb2-ns">
+            <canvas class="snow" id="sky"> </canvas>
+            <img src="/img/buildings.svg" class="db" alt="buildings" />
 
-                <!-- <div class="temperature-decription" >TBD</div> -->
-                <div class="">
-                    <!-- <div class="h3 location-timezone" >TBD</div> -->
-                  <!-- <h3 class="new-time white-90" data-time>Retrieving Time...</h3> -->
-                </div>
-
-
-                <h3 class="f6 ttu tracked" data-status>Hot as hell</h3>
-                <div class="cf">
-                  <dl class="fl fn-l w-50 dib-l w-auto-l lh-title mr5-l">
-                    <dd class="f6 fw4 ml0" > Current Location</dd>
-                    <dd class="f3 fw6 ml0"data-location>Jamaica, WI</dd>
-                  </dl>
-                  <dl class="fl fn-l w-50 dib-l w-auto-l lh-title mr5-l">
-                    <dd class="f6 fw4 ml0" >Wind Speed</dd>
-                    <dd class="f3 fw6 ml0"data-wind>100</dd>
-                  </dl>
-                  <dl class="fl fn-l w-50 dib-l w-auto-l lh-title mr5-l">
-                    <dd class="f6 fw4 ml0">Precipitation</dd>
-                    <dd class="f3 fw6 ml0" data-precipitation>99%</dd>
-                  </dl>
-                   <dl class="fl fn-l w-50 dib-l w-auto-l lh-title mr5-l">
-                    <dd class="f6 fw4 ml0">Humidity</dd>
-                    <dd class="f3 fw6 ml0">0.4</dd>
-                  </dl>
-              
-                </div>
-
-
-            </div>
-
-
-            <!-- <div class="detail-section">
-                <div class="detail">
-                  <div class="title">Wind</div>
-                  <div class="value" data-wind>TBD</div>
-                </div>
-              
-                <div class="detail">
-                  <div class="title">Precipitation</div>
-                  <div class="value" data-precipitation>TBD</div>
-                </div>
-              </div>
-
- -->
-
-
-             
-              
-            
-
-
-
-   
-        </div>
-        <canvas class="snow" id="sky"> </canvas>
-        <img src="/img/buildings.svg" class="db" alt="buildings"/>
-        
         </div>
         <footer class="pv4 ph3 ph5-m ph6-l mid-gray">
 
-            <div class="pa4">
+            <!-- <div class="pa4">
                 <blockquote class="athelas ml0 mt0 pl4  bl bw2  b--blue" id="quote">
                     <p class="f5 f4-m f3-l lh-copy measure mt0">
                         Discipline in typography is a prime virtue. Individuality
@@ -133,25 +119,26 @@
                         dullness and mediocrity.
                     </p>
                 </blockquote>
-                <cite class="f6 ttu tracked fs-normal" id="author" >―Stanley Morison</cite>
-              </div>
+                <cite class="f6 ttu tracked fs-normal" id="author">―Stanley Morison</cite>
+            </div> -->
 
 
-           <small class="f6 db tc">© 2016 <b class="ttu">SOME COMPANY Inc</b>., All Rights Reserved</small>
+            <small class="f6 db tc">© 2016 <b class="ttu">SOME COMPANY Inc</b>., All Rights Reserved</small>
             <div class="tc mt3">
-              <a href="https://darksky.net/poweredby" title="Language" class="f6 dib ph2 link mid-gray dim">Powered By Dark Sky</a>
-              <a href="https://www.freepik.com/"    title="Terms" class="f6 dib ph2 link mid-gray dim">SVG by freepik.com</a>
-              <!-- <a href="/privacy/"  title="Privacy" class="f6 dib ph2 link mid-gray dim">Privacy</a> -->
-            </div> 
+                <a href="https://darksky.net/poweredby" title="Language" class="f6 dib ph2 link mid-gray dim">Powered By
+                    Dark Sky</a>
+                <a href="https://www.freepik.com/" title="Terms" class="f6 dib ph2 link mid-gray dim">SVG by
+                    freepik.com</a>
+                <!-- <a href="/privacy/"  title="Privacy" class="f6 dib ph2 link mid-gray dim">Privacy</a> -->
+            </div>
 
-          </footer>
-      </main>
-     
+        </footer>
+    </main>
 
-      <script src="main.js" async defer></script>
-      <!-- <script src="js/snow.js" async defer></script> -->
-      <script src="skycons.js" async defer></script>
+
+    <script src="main.js" async defer></script>
+    <!-- <script src="js/snow.js" async defer></script> -->
+ 
 </body>
+
 </html>
-
-
