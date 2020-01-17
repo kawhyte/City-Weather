@@ -63,7 +63,6 @@ document.addEventListener("DOMContentLoaded", function() {
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         setWeatherData(data, place.formatted_address);
       });
 
@@ -82,28 +81,26 @@ document.addEventListener("DOMContentLoaded", function() {
   icon.play();
 
   function setWeatherData(data, place) {
+   
     locationElement.textContent = place;
-    temperatureElement.textContent = data.temperature;
-    precipitationElement.textContent = `${data.precipProbability * 100}%`;
-    windElement.textContent = data.windSpeed;
-    humidityElement.textContent = data.humidity;
-    statusElement.textContent = data.summary;
+    temperatureElement.textContent = data.currently.temperature;
+    precipitationElement.textContent = `${data.currently.precipProbability * 100}%`;
+    windElement.textContent = data.currently.windSpeed;
+    humidityElement.textContent = data.currently.humidity;
+    statusElement.textContent = data.currently.summary;
+    timeElement.textContent = moment.tz(moment(), data.timezone).format('h:mm:a'); 
 
-    // console.log(wordInString(data.summary, "cloudy"));
-    //console.log("Date Time" + data.time)
-    console.log("Converted Time -"+ converTime(data.time))
-    timeElement.textContent = data.time;
-    icon.set("icon", data.icon);
+    icon.set("icon", data.currently.icon);
     icon.play();
 
     //Build weather condition
-    if (wordInString(data.summary, "snow")) {
+    if (wordInString(data.currently.summary, "snow")) {
       //setInterval(drawFlakes, 30);
-    } else if (wordInString(data.summary, "rain")) {
+    } else if (wordInString(data.currently.summary, "rain")) {
       makeItRain();
-    } else if (wordInString(data.summary, "sunny")) {
+    } else if (wordInString(data.currently.summary, "sunny")) {
       makeItRain();
-    } else if (wordInString(data.summary, "cloudy")) {
+    } else if (wordInString(data.currently.summary, "cloudy")) {
       makeItRain();
     } else {
       makeItRain();
@@ -197,17 +194,28 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 });
-function converTime (localTime) {
 
- console.log("OldTime" +localTime);
+
+function converTime (localTimeZone) {
+
+  let militaryTime = moment.tz(moment(), localTimeZone).format('h:mm:a')
+  let hour = moment.tz(moment(), localTimeZone).format('HH')
+
+ console.log("Military Time " + militaryTime);
  
+ if (hour > 12) {
+
+  moment.tz(moment(), localTimeZone).format('hh:mm:')
+   
+ } else {
+  moment.tz(moment(), localTimeZone).format('hh:mm:a')
+ }
       // Time
-      newlocalTime = new Date(localTime*1000);
-      console.log("newlocalTime "+newlocalTime);
-      let hour = newlocalTime.getHours();
-      let minutes = newlocalTime.getMinutes();
-      //console.log("Convert - time "+ time);
-      //console.log("Convert - localTime "+newlocalTime);
+      // newlocalTime = new Date(localTime*1000);
+      // console.log("newlocalTime "+newlocalTime);
+     
+      console.log("Convert - hour "+ hour);
+      console.log("Convert - min "+ minutes);
       //console.log(hour +":"+ minutes)
 
       //setGreeting(hour);
