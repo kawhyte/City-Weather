@@ -36,15 +36,6 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     const latitude = place.geometry.location.lat();
     const longitude = place.geometry.location.lng();
-    // const timenow = http://worldtimeapi.org/api/timezone/Europe
-
-    // fetch('http://worldtimeapi.org/api/timezone/Europe')
-    // .then((response) => {
-    //   return response.json();
-    // })
-    // .then((myJson) => {
-    //   console.log("myjson"+ myJson);
-    // });
 
     fetch("/weather", {
       method: "POST",
@@ -91,20 +82,31 @@ document.addEventListener("DOMContentLoaded", function() {
     icon.set("icon", data.currently.icon);
     icon.play();
 
-    //Build weather condition
-    if (wordInString(data.currently.summary, "snow")) {
-      //setInterval(drawFlakes, 30);
-    } else if (wordInString(data.currently.summary, "rain")) {
-      makeItRain();
-    } else if (wordInString(data.currently.summary, "sunny")) {
-      makeItRain();
-    } else if (wordInString(data.currently.summary, "cloudy")) {
-      makeItRain();
-    } else {
-      makeItRain();
-    }
+    //Sky background
+    setSkyColor(moment.tz(moment(), data.timezone).format("H"));
+     //Build weather condition
+    weatherRecipe(data.currently.summary)
 
-    setGreeting(moment.tz(moment(), data.timezone).format("H"));
+  }
+
+
+
+function weatherRecipe(currentWeather) {
+
+ if (wordInString(currentWeather, "snow")) {
+  letItSnow();
+  //setInterval(drawFlakes, 30);
+} else if (wordInString(currentWeather, "rain")) {
+  makeItRain();
+} else if (wordInString(currentWeather, "sunny")) {
+  makeItRain();
+} else if (wordInString(currentWeather, "cloudy")) {
+  letItSnow();
+} else {
+  letItSnow();
+}
+
+
   }
 
   function wordInString(s, word) {
@@ -167,10 +169,63 @@ document.addEventListener("DOMContentLoaded", function() {
   }
   //RAIN END//
 
+
+
+ /// Snow effect  //
+  function letItSnow(){
+    let canvas = document.getElementById("sky");
+    let ctx = canvas.getContext("2d");
+    let W = window.innerWidth;
+    let H = window.innerHeight;
+    canvas.width = W;
+    canvas.height = H;
+    let mf = 100;
+    let flakes = [];
+    for (let i = 0; i < mf; i++) {
+      flakes.push({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        r: Math.random() * 5 + 2,
+        d: Math.random() + 1
+      });
+    }
+    // draw flakes
+    function drawFlakes() {
+      ctx.clearRect(0, 0, W, H);
+      ctx.fillStyle = "white";
+      ctx.beginPath();
+      for (let i = 0; i < mf; i++) {
+        let f = flakes[i];
+        ctx.moveTo(f.x, f.y);
+        ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2, true);
+      }
+      ctx.fill();
+      moveFlakes();
+    }
+    // animate flakes
+    let angle = 0;
+    function moveFlakes() {
+      angle += 0.01;
+      for (let i = 0; i < mf; i++) {
+        let f = flakes[i];
+        f.y += Math.pow(f.d, 2) + 1;
+        f.x += Math.sin(angle) * 2;
+        if (f.y > H) {
+          flakes[i] = { x: Math.random() * W, y: 0, r: f.r, d: f.d };
+        }
+      }
+    }
+    setInterval(drawFlakes, 30);
+  }
+  //SNOW END//
+
+
+
+
+
   // //set background
-  function setGreeting(hour) {
-    //let today = new Date();
-    //let hour = today.getHours();
+  function setSkyColor(hour) {
+
     console.log("From Greeting: " + hour);
     let skyGradient = {
       1: "#00000c",
@@ -186,7 +241,7 @@ document.addEventListener("DOMContentLoaded", function() {
       11: "linear-gradient(to bottom, #90dffe 0%,#38a3d1 100%)",
       13: "linear-gradient(to bottom, #57c1eb 0%,#246fa8 100%)",
       14: "linear-gradient(to bottom, #2d91c2 0%,#1e528e 100%)",
-      15: "inear-gradient(to bottom, #2473ab 0%,#1e528e 70%,#5b7983 100%)",
+      15: "linear-gradient(to bottom, #2473ab 0%,#1e528e 70%,#5b7983 100%)",
       16: "linear-gradient(to bottom, #1e528e 0%,#265889 50%,#9da671 100%)",
       17: "linear-gradient(to bottom, #1e528e 0%,#728a7c 50%,#e9ce5d 100%)",
       18: "linear-gradient(to bottom, #154277 0%,#576e71 30%,#e1c45e 70%,#b26339 100%)",
@@ -198,36 +253,19 @@ document.addEventListener("DOMContentLoaded", function() {
       24: "#00000c"
     };
 
+
+    console.log(skyGradient[hour])
     if (
-      typeof skyGradient[hour] !== "undefined" ||
-      skyGradient[hour] !== null
+      typeof skyGradient[hour] === "undefined" &&
+      skyGradient[hour] === null
     ) {
+      console.log( "Here")
       document.getElementById("bg").style.background =
         "url('./img/clear_blue_sky.svg') center/cover";
       return;
     }
 
     document.getElementById("bg").style.background = skyGradient[hour];
-    //let currentValue  = numbers[s[i]];
-
-    // if (hour <= 12) {
-    //   // greeting.textContent = "Good morning!";
-    //   document.getElementById("bg").style.background =
-    //     "url('./img/clear_blue_sky.svg') center/cover"; //"url('/public/img/clear_blue_sky.svg') center/cover"
-    //   console.log(background_image);
-    //   //background_image.style.background = `url(/img/tomato.svg) no-repeat center/cover;`
-    // } else if (hour > 12 && hour < 18) {
-    //   console.log("skyGradient" + skyGradient[hour].toString());
-
-    //   document.getElementById("bg").style.background = skyGradient[hour]; //"linear-gradient(to bottom, #154277 0%,#576e71 30%,#e1c45e 70%,#b26339 100%)"//"url('/public/img/city_night.svg') center/cover"
-    //   // greeting.textContent = "Good afternoon!";
-    //   // mainIcon.src = `img/post-meridiem.svg`
-    // } else {
-    //   document.getElementById("bg").style.background =
-    //     "url('./img/sunset_bg.svg') center/cover"; //"url('/public/img/background_night.svg') center/cover"
-    //   // greeting.textContent = "Good evening!";
-    //   // mainIcon.src = `img/post-meridiem_evening.svg`
-    // }
   }
 });
 
@@ -371,50 +409,7 @@ window.addEventListener("load", () => {
   //   function wordInString(s, word) {
   //     return new RegExp("\\b" + word + "\\b", "i").test(s);
   //   }
-  //   /// Snow effect  //
-  //   let canvas = document.getElementById("sky");
-  //   let ctx = canvas.getContext("2d");
-  //   let W = window.innerWidth;
-  //   let H = window.innerHeight;
-  //   canvas.width = W;
-  //   canvas.height = H;
-  //   let mf = 100;
-  //   let flakes = [];
-  //   for (let i = 0; i < mf; i++) {
-  //     flakes.push({
-  //       x: Math.random() * W,
-  //       y: Math.random() * H,
-  //       r: Math.random() * 5 + 2,
-  //       d: Math.random() + 1
-  //     });
-  //   }
-  //   // draw flakes
-  //   function drawFlakes() {
-  //     ctx.clearRect(0, 0, W, H);
-  //     ctx.fillStyle = "white";
-  //     ctx.beginPath();
-  //     for (let i = 0; i < mf; i++) {
-  //       let f = flakes[i];
-  //       ctx.moveTo(f.x, f.y);
-  //       ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2, true);
-  //     }
-  //     ctx.fill();
-  //     moveFlakes();
-  //   }
-  //   // animate flakes
-  //   let angle = 0;
-  //   function moveFlakes() {
-  //     angle += 0.01;
-  //     for (let i = 0; i < mf; i++) {
-  //       let f = flakes[i];
-  //       f.y += Math.pow(f.d, 2) + 1;
-  //       f.x += Math.sin(angle) * 2;
-  //       if (f.y > H) {
-  //         flakes[i] = { x: Math.random() * W, y: 0, r: f.r, d: f.d };
-  //       }
-  //     }
-  //   }
-  // //SNOW END//
+
   // //RAIN//
   // function makeItRain(){
   // canvas = document.getElementById("sky");
@@ -492,40 +487,7 @@ window.addEventListener("load", () => {
   // }
 });
 
-//Zero
-function addZero(n) {
-  return (parseInt(n, 10) < 10 ? "0" : "") + n;
-}
-//  set time
-// function setAMPM(){
-//   if (hour < 12) {
-//   greeting.textContent = "Good morning!";
-//   mainIcon.src = `img/ante-meridiem.svg`
-// } else if (hour < 18) {
-//   greeting.textContent = "Good afternoon!";
-//   mainIcon.src = `img/post-meridiem.svg`
-// } else {
-//   greeting.textContent = "Good evening!";
-//   mainIcon.src = `img/post-meridiem_evening.svg`
-// }
-// }
 
-//set background
-// function setGreeting() {
-//   let today = new Date();
-//   let hour = today.getHours();
-
-//   if (hour < 12) {
-//     greeting.textContent = "Good morning!";
-//     // mainIcon.src = `img/ante-meridiem.svg`
-//   } else if (hour < 18) {
-//     greeting.textContent = "Good afternoon!";
-//     // mainIcon.src = `img/post-meridiem.svg`
-//   } else {
-//     greeting.textContent = "Good evening!";
-//     // mainIcon.src = `img/post-meridiem_evening.svg`
-//   }
-// }
 
 //Get name
 // function getName() {
@@ -571,47 +533,7 @@ function addZero(n) {
 //   }
 // }
 
-//Get focus
-// async function getMantra() {
-//   const response = await fetch("quotes.json");
-//   const myJson = await response.json();
-//   const myJsonSize = JSON.stringify(myJson).length;
-//   //console.log(myJsonSize);
-//   num = Math.floor(Math.random() * Math.floor(100));
-//   //console.log(num);
 
-//   if (myJson[num].text === null || myJson[num].from === null) {
-//     quote.textContent =
-//       "A hero is one who knows how to hang on for one minute longer.";
-//     author.textContent = "Norwegian proverb";
-//   } else {
-//     quote.textContent = myJson[num].text;
-//     author.textContent = myJson[num].from;
-//   }
-//   if ( === null || mantraData.text) {
-//     mantra.textContent = "Inhale love. Exhale gratitude.";
-//   } else {
 
-//var json = JSON.parse(myJson);
 
-//console.log(myJson);
-// console.log(JSON.stringify(myJson[num].from));
-//console.log(JSON.stringify(myJson).length);
 
-//}
-//}
-
-//name.addEventListener("keypress", setName);
-//name.addEventListener("blur", setName);
-// focus.addEventListener("keypress", setFocus);
-// focus.addEventListener("blur", setFocus);
-
-//run
-//getMantra();
-// setAMPM();
-// getFocus();
-// showTime();
-// setGreeting();
-//getName();
-
-//foobar()
