@@ -99,11 +99,11 @@ function weatherRecipe(currentWeather) {
 } else if (wordInString(currentWeather, "rain")) {
   makeItRain();
 } else if (wordInString(currentWeather, "sunny")) {
-  makeItRain();
+  //makeItRain();
 } else if (wordInString(currentWeather, "cloudy")) {
-  letItSnow();
+  //letItSnow();
 } else {
-  letItSnow();
+  //letItSnow();
 }
 
 

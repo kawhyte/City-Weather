@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,12 +8,12 @@
     <title>City Map</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-   
+
     <script defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/skycons/1396634940/skycons.min.js">
     </script>
-    
 
-    
+
+
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css" />
 </head>
@@ -27,7 +28,7 @@
                     Animated City Weather
                 </span>
             </h2>
-             <!-- <h1 class="f2 fw7 ttu tracked lh-title mt0 mb3 avenir center">Animated City Weather</h1> -->
+            <!-- <h1 class="f2 fw7 ttu tracked lh-title mt0 mb3 avenir center">Animated City Weather</h1> -->
         </div>
 
         <div class="greetings white-90">
@@ -40,8 +41,8 @@
                     <form class="pa2 black-80">
                         <div class="measure">
                             <!-- <label for="name" class="f6 b db mb2">Name <span class="normal black-60">(optional)</span></label> -->
-                            <input id="name" class="input-reset ba -20 pa2 mb2 db w-100" type="text"
-                                data-city-search placeholder="eg. San Francisco" aria-describedby="name-desc">
+                            <input id="name" class="input-reset ba -20 pa2 mb2 db w-100" type="text" data-city-search
+                                placeholder="eg. San Francisco" aria-describedby="name-desc">
                         </div>
                     </form>
 
@@ -49,18 +50,18 @@
             </div>
         </div>
     </header>
-   
+
 
     <main class="cf pa3 pa4-m pa5-l mw9 center">
 
-       
+
         <div class="container helvetica" id="bg">
 
 
-          
-           
+
+
             <div class="fr w-100 w-80-l">
-                
+
                 <div class="degree-section f2 f1-l lh-title mt0 mb4 mb2-ns">
                     <h2 class="temperature-degree" data-temperature>--</h2>
                     <!-- <span>F</span> -->
@@ -70,10 +71,10 @@
                     <!-- <canvas id="skycon-img" class="icon" width="128" height="128"></canvas> -->
                 </div>
 
-                
+
 
                 <div class=" f4 mt0 mb3 mb2-ns">
-                
+
                     <div class="cf detail">
 
                         <dl class="fl fn-l w-50 dib-l w-auto-l lh-title mr5-l">
@@ -105,7 +106,7 @@
                 </div>
 
             </div>
-            <div > <canvas class="snow" id="sky"> </canvas> </div>
+            <div> <canvas class="snow" id="sky"> </canvas> </div>
             <!-- <canvas class="snow container" id="sky"> </canvas> -->
             <img src="/img/buildings.svg" class="db" alt="buildings" />
 
@@ -129,7 +130,8 @@
 
             <small class="f6 db tc"><b class="ttu">City Weather App</small>
             <div class="tc mt3">
-                <a href="https://www.kennywhyte.com"  title="Privacy" class="f6 dib ph2 link mid-gray dim">by: Kenny Whyte</a>
+                <a href="https://www.kennywhyte.com" title="Privacy" class="f6 dib ph2 link mid-gray dim">by: Kenny
+                    Whyte</a>
                 <a href="https://darksky.net/poweredby" title="Language" class="f6 dib ph2 link mid-gray dim">Powered By
                     Dark Sky</a>
                 <a href="https://www.freepik.com/" title="Terms" class="f6 dib ph2 link mid-gray dim">SVG
@@ -138,17 +140,20 @@
 
         </footer>
     </main>
-    
+
     <script src="main.js" async defer></script>
 
     <script type="text/javascript"
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCupHbdBIWGhHwxkNZdURt3IQCkIE_PiT0&libraries=places"  defer></script>
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCupHbdBIWGhHwxkNZdURt3IQCkIE_PiT0&libraries=places"
+        defer></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.23/moment-timezone-with-data-2012-2022.min.js"></script>
-    
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.23/moment-timezone-with-data-2012-2022.min.js">
+    </script>
+
     <!-- <script src="js/snow.js" async defer></script> -->
- 
+
 </body>
 
 </html>

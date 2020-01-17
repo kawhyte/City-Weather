@@ -22,15 +22,6 @@ app.post("/weather", (req, res) => {
     responseType: "json"
   }).then(data => {
 
-    // dateObj = new Date(data.data.currently.time * 1000);
-    // utcString = dateObj.toUTCString();
-    // //console.log(utcString)
-    // var localDate = new Date(utcString);
-    
-    // let test = convertUTCDateToLocalDate(localDate)
-    // //console.log(test)
-    // time = utcString.slice(-11, -4);
- //console.log(data.data.timezone)
 
     res.json(data.data);
   });
@@ -43,21 +34,3 @@ if (port == null || port == "") {
 }
 app.listen(port);
 
-
-// function convertUTCDateToLocalDate(date) {
-//   var newDate = new Date(date.getTime()+date.getTimezoneOffset()*60*1000);
-// //console.log(date.getTime())
-// //console.log(date.getTimezoneOffset())
-
-
-//   var offset = date.getTimezoneOffset() / 60;
-//   var hours = date.getHours();
-
-//   newDate.setHours(hours - offset);
-
-//   return newDate;   
-// }
-
-// app.listen(4000, () => {
-//   console.log("Server Ready on port 4000...");
-// });
