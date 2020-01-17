@@ -17,12 +17,11 @@ const temperatureF = document.querySelector(".degree-section > span");
 const newTime = document.querySelector(".new-time");
 
 function defaultValue() {
-  
-  document.getElementById("bg").style.background = "url('./img/sunset_bg.svg') center/cover"
+  document.getElementById("bg").style.background =
+    "url('./img/sunset_bg.svg') center/cover";
 }
 
 window.onload = defaultValue;
-
 
 document.addEventListener("DOMContentLoaded", function() {
   // Google API
@@ -46,9 +45,6 @@ document.addEventListener("DOMContentLoaded", function() {
     // .then((myJson) => {
     //   console.log("myjson"+ myJson);
     // });
-
-   
-
 
     fetch("/weather", {
       method: "POST",
@@ -81,14 +77,16 @@ document.addEventListener("DOMContentLoaded", function() {
   icon.play();
 
   function setWeatherData(data, place) {
-   
     locationElement.textContent = place;
     temperatureElement.textContent = data.currently.temperature;
-    precipitationElement.textContent = `${data.currently.precipProbability * 100}%`;
+    precipitationElement.textContent = `${data.currently.precipProbability *
+      100}%`;
     windElement.textContent = data.currently.windSpeed;
     humidityElement.textContent = data.currently.humidity;
     statusElement.textContent = data.currently.summary;
-    timeElement.textContent = moment.tz(moment(), data.timezone).format('h:mm:a'); 
+    timeElement.textContent = moment
+      .tz(moment(), data.timezone)
+      .format("h:mm:a");
 
     icon.set("icon", data.currently.icon);
     icon.play();
@@ -106,7 +104,7 @@ document.addEventListener("DOMContentLoaded", function() {
       makeItRain();
     }
 
-    setGreeting(15);
+    setGreeting(moment.tz(moment(), data.timezone).format("H"));
   }
 
   function wordInString(s, word) {
@@ -169,72 +167,105 @@ document.addEventListener("DOMContentLoaded", function() {
   }
   //RAIN END//
 
-
-// //set background
+  // //set background
   function setGreeting(hour) {
     //let today = new Date();
     //let hour = today.getHours();
-   //console.log("From Greeting: "+ hour);
-    if (hour <= 12) {
-      // greeting.textContent = "Good morning!";
-      document.getElementById("bg").style.background = "url('./img/clear_blue_sky.svg') center/cover" //"url('/public/img/clear_blue_sky.svg') center/cover"
-      console.log(background_image)
-       //background_image.style.background = `url(/img/tomato.svg) no-repeat center/cover;`
-    } else if (hour > 12 && hour < 18) {
-      document.getElementById("bg").style.background = "url('./img/city_night.svg') center/cover"//"url('/public/img/city_night.svg') center/cover"
-      // greeting.textContent = "Good afternoon!";
-      // mainIcon.src = `img/post-meridiem.svg`
-    } else {
-      document.getElementById("bg").style.background = "url('./img/sunset_bg.svg') center/cover" //"url('/public/img/background_night.svg') center/cover"
-      // greeting.textContent = "Good evening!";
-      // mainIcon.src = `img/post-meridiem_evening.svg`
+    console.log("From Greeting: " + hour);
+    let skyGradient = {
+      1: "#00000c",
+      2: "linear-gradient(to bottom, #020111 85%,#191621 100%)",
+      3: "linear-gradient(to bottom, #020111 10%,#3a3a52 100%)",
+      4: "linear-gradient(to bottom, #20202c 0%,#515175 100%)",
+      5: "linear-gradient(to bottom, #40405c 0%,#6f71aa 80%,#8a76ab 100%)",
+      6: "linear-gradient(to bottom, #4a4969 0%,#7072ab 50%,#cd82a0 100%)",
+      7: "linear-gradient(to bottom, #757abf 0%,#8583be 60%,#eab0d1 100%)",
+      8: "linear-gradient(to bottom, #82addb 0%,#ebb2b1 100%)",
+      9: "linear-gradient(to bottom, #94c5f8 1%,#a6e6ff 70%,#b1b5ea 100%)",
+      10: "linear-gradient(to bottom, #b7eaff 0%,#94dfff 100%)",
+      11: "linear-gradient(to bottom, #90dffe 0%,#38a3d1 100%)",
+      13: "linear-gradient(to bottom, #57c1eb 0%,#246fa8 100%)",
+      14: "linear-gradient(to bottom, #2d91c2 0%,#1e528e 100%)",
+      15: "inear-gradient(to bottom, #2473ab 0%,#1e528e 70%,#5b7983 100%)",
+      16: "linear-gradient(to bottom, #1e528e 0%,#265889 50%,#9da671 100%)",
+      17: "linear-gradient(to bottom, #1e528e 0%,#728a7c 50%,#e9ce5d 100%)",
+      18: "linear-gradient(to bottom, #154277 0%,#576e71 30%,#e1c45e 70%,#b26339 100%)",
+      19: "linear-gradient(to bottom, #163C52 0%,#4F4F47 30%,#C5752D 60%,#B7490F 80%, #2F1107 100%",
+      20: "linear-gradient(to bottom, #071B26 0%,#071B26 30%,#8A3B12 80%,#240E03 100%",
+      21: "linear-gradient(to bottom, #010A10 30%,#59230B 80%,#2F1107 100%",
+      22: "linear-gradient(to bottom, #090401 50%,#4B1D06 100%",
+      23: "linear-gradient(to bottom, #00000c 80%,#150800 100%",
+      24: "#00000c"
+    };
+
+    if (
+      typeof skyGradient[hour] !== "undefined" ||
+      skyGradient[hour] !== null
+    ) {
+      document.getElementById("bg").style.background =
+        "url('./img/clear_blue_sky.svg') center/cover";
+      return;
     }
+
+    document.getElementById("bg").style.background = skyGradient[hour];
+    //let currentValue  = numbers[s[i]];
+
+    // if (hour <= 12) {
+    //   // greeting.textContent = "Good morning!";
+    //   document.getElementById("bg").style.background =
+    //     "url('./img/clear_blue_sky.svg') center/cover"; //"url('/public/img/clear_blue_sky.svg') center/cover"
+    //   console.log(background_image);
+    //   //background_image.style.background = `url(/img/tomato.svg) no-repeat center/cover;`
+    // } else if (hour > 12 && hour < 18) {
+    //   console.log("skyGradient" + skyGradient[hour].toString());
+
+    //   document.getElementById("bg").style.background = skyGradient[hour]; //"linear-gradient(to bottom, #154277 0%,#576e71 30%,#e1c45e 70%,#b26339 100%)"//"url('/public/img/city_night.svg') center/cover"
+    //   // greeting.textContent = "Good afternoon!";
+    //   // mainIcon.src = `img/post-meridiem.svg`
+    // } else {
+    //   document.getElementById("bg").style.background =
+    //     "url('./img/sunset_bg.svg') center/cover"; //"url('/public/img/background_night.svg') center/cover"
+    //   // greeting.textContent = "Good evening!";
+    //   // mainIcon.src = `img/post-meridiem_evening.svg`
+    // }
   }
-
-
-
 });
 
+function converTime(localTimeZone) {
+  let militaryTime = moment.tz(moment(), localTimeZone).format("h:mm:a");
+  let hour = moment.tz(moment(), localTimeZone).format("HH");
 
-function converTime (localTimeZone) {
+  console.log("Military Time " + militaryTime);
 
-  let militaryTime = moment.tz(moment(), localTimeZone).format('h:mm:a')
-  let hour = moment.tz(moment(), localTimeZone).format('HH')
+  if (hour > 12) {
+    moment.tz(moment(), localTimeZone).format("hh:mm:");
+  } else {
+    moment.tz(moment(), localTimeZone).format("hh:mm:a");
+  }
+  // Time
+  // newlocalTime = new Date(localTime*1000);
+  // console.log("newlocalTime "+newlocalTime);
 
- console.log("Military Time " + militaryTime);
- 
- if (hour > 12) {
+  console.log("Convert - hour " + hour);
+  console.log("Convert - min " + minutes);
+  //console.log(hour +":"+ minutes)
 
-  moment.tz(moment(), localTimeZone).format('hh:mm:')
-   
- } else {
-  moment.tz(moment(), localTimeZone).format('hh:mm:a')
- }
-      // Time
-      // newlocalTime = new Date(localTime*1000);
-      // console.log("newlocalTime "+newlocalTime);
-     
-      console.log("Convert - hour "+ hour);
-      console.log("Convert - min "+ minutes);
-      //console.log(hour +":"+ minutes)
+  //setGreeting(hour);
+  // 12 Format
+  hour = hour % 12 || 12;
+  //console.log("Minutes:" + minutes);
+  //console.log("Hour:" + hour);
+  //return localTime;
+  return hour + ":" + minutes;
 
-      //setGreeting(hour);
-      // 12 Format
-      hour = hour % 12 || 12;
-      //console.log("Minutes:" + minutes);
-      //console.log("Hour:" + hour);
-      //return localTime;
-      return (hour +":"+ minutes);
+  //timeElement.textContent = `${hour}+${minutes} +${
+  //  hour < 12 ? " AM" : " PM"
+  //}`;
+  // newTime.innerHTML = `${hour}<span>:</span>${minutes} <span>${
+  //    hour < 12 ? " AM" : " PM"
+  //  }</span>`;
 
-       //timeElement.textContent = `${hour}+${minutes} +${
-       //  hour < 12 ? " AM" : " PM"
-       //}`;
-      // newTime.innerHTML = `${hour}<span>:</span>${minutes} <span>${
-      //    hour < 12 ? " AM" : " PM"
-      //  }</span>`;
-
-      //
-
+  //
 }
 //       temperatureDegree.textContent = Math.round(temperature);
 //       temperatureDescription.textContent = summary;
