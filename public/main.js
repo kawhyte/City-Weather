@@ -35,10 +35,20 @@ document.addEventListener("DOMContentLoaded", function() {
       console.log("place is null");
       return;
     }
-
-
     const latitude = place.geometry.location.lat();
     const longitude = place.geometry.location.lng();
+    // const timenow = http://worldtimeapi.org/api/timezone/Europe
+
+    // fetch('http://worldtimeapi.org/api/timezone/Europe')
+    // .then((response) => {
+    //   return response.json();
+    // })
+    // .then((myJson) => {
+    //   console.log("myjson"+ myJson);
+    // });
+
+   
+
 
     fetch("/weather", {
       method: "POST",
@@ -77,12 +87,12 @@ document.addEventListener("DOMContentLoaded", function() {
     precipitationElement.textContent = `${data.precipProbability * 100}%`;
     windElement.textContent = data.windSpeed;
     humidityElement.textContent = data.humidity;
-
     statusElement.textContent = data.summary;
 
-    console.log(wordInString(data.summary, "cloudy"));
-
-    //timeElement.textContent = converTime(data.time);
+    // console.log(wordInString(data.summary, "cloudy"));
+    //console.log("Date Time" + data.time)
+    console.log("Converted Time -"+ converTime(data.time))
+    timeElement.textContent = data.time;
     icon.set("icon", data.icon);
     icon.play();
 
@@ -167,7 +177,7 @@ document.addEventListener("DOMContentLoaded", function() {
   function setGreeting(hour) {
     //let today = new Date();
     //let hour = today.getHours();
-   console.log("From Greeting: "+ hour);
+   //console.log("From Greeting: "+ hour);
     if (hour <= 12) {
       // greeting.textContent = "Good morning!";
       document.getElementById("bg").style.background = "url('./img/clear_blue_sky.svg') center/cover" //"url('/public/img/clear_blue_sky.svg') center/cover"
@@ -187,33 +197,37 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 });
-// function converTime (localTime) {
+function converTime (localTime) {
 
-//       // Time
-//       localTime = new Date(time *1000);
-//       let hour = localTime.getHours();
-//       let minutes = localTime.getMinutes();
-//       console.log(time);
-//       console.log(localTime);
-//       console.log(hour +":"+ minutes)
+ console.log("OldTime" +localTime);
+ 
+      // Time
+      newlocalTime = new Date(localTime*1000);
+      console.log("newlocalTime "+newlocalTime);
+      let hour = newlocalTime.getHours();
+      let minutes = newlocalTime.getMinutes();
+      //console.log("Convert - time "+ time);
+      //console.log("Convert - localTime "+newlocalTime);
+      //console.log(hour +":"+ minutes)
 
-//       //setGreeting(hour);
-//       // 12 Format
-//       hour = hour % 12 || 12;
-//       console.log("Minutes:" + minutes);
-//       return localTime;
-//       //return (hour +":"+ minutes);
+      //setGreeting(hour);
+      // 12 Format
+      hour = hour % 12 || 12;
+      //console.log("Minutes:" + minutes);
+      //console.log("Hour:" + hour);
+      //return localTime;
+      return (hour +":"+ minutes);
 
-//        //timeElement.textContent = `${hour}+${minutes} +${
-//        //  hour < 12 ? " AM" : " PM"
-//        //}`;
-//       newTime.innerHTML = `${hour}<span>:</span>${minutes} <span>${
-//          hour < 12 ? " AM" : " PM"
-//        }</span>`;
+       //timeElement.textContent = `${hour}+${minutes} +${
+       //  hour < 12 ? " AM" : " PM"
+       //}`;
+      // newTime.innerHTML = `${hour}<span>:</span>${minutes} <span>${
+      //    hour < 12 ? " AM" : " PM"
+      //  }</span>`;
 
-//       //
+      //
 
-// }
+}
 //       temperatureDegree.textContent = Math.round(temperature);
 //       temperatureDescription.textContent = summary;
 //       locationTimezone.textContent = data.timezone;

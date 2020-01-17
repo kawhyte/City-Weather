@@ -26,8 +26,8 @@ app.post('/weather', (req, res) => {
 
 let port = process.env.PORT;
 if (port == null || port == "") {
-  console.log("Server Ready on port 8000...");
-  port = 8000;
+  console.log("Server Ready on port 3000...");
+  port = 3000;
 }
 app.listen(port);
 

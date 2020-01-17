@@ -38,7 +38,7 @@
                         <div class="measure">
                             <!-- <label for="name" class="f6 b db mb2">Name <span class="normal black-60">(optional)</span></label> -->
                             <input id="name" class="input-reset ba -20 pa2 mb2 db w-100" type="text"
-                                data-city-search placeholder="ex. Reno" aria-describedby="name-desc">
+                                data-city-search placeholder="eg. San Francisco" aria-describedby="name-desc">
                         </div>
                     </form>
 
@@ -46,14 +46,18 @@
             </div>
         </div>
     </header>
+   
 
     <main class="cf pa3 pa4-m pa5-l mw9 center">
+
+       
         <div class="container helvetica" id="bg">
-            
+
+
+          
+           
             <div class="fr w-100 w-80-l">
                 
-
-
                 <div class="degree-section f2 f1-l lh-title mt0 mb4 mb2-ns">
                     <h2 class="temperature-degree" data-temperature>--</h2>
                     <!-- <span>F</span> -->
@@ -63,15 +67,23 @@
                     <!-- <canvas id="skycon-img" class="icon" width="128" height="128"></canvas> -->
                 </div>
 
-                <div class="time-location f4 mt0 mb3 mb2-ns">
-                    <div class="">
+                
 
-                    </div>
-                    <h3 class="f6 ttu tracked" data-status>---</h3>
-                    <div class="cf">
+                <div class=" f4 mt0 mb3 mb2-ns">
+                
+                    <div class="cf detail">
+
+                        <dl class="fl fn-l w-50 dib-l w-auto-l lh-title mr5-l">
+                            <dd class="f6 fw4 ml0"> Status</dd>
+                            <dd class="f3 fw6 ml0" data-status>-----</dd>
+                        </dl>
                         <dl class="fl fn-l w-50 dib-l w-auto-l lh-title mr5-l">
                             <dd class="f6 fw4 ml0"> Current Location</dd>
                             <dd class="f3 fw6 ml0" data-location>-----</dd>
+                        </dl>
+                        <dl class="fl fn-l w-50 dib-l w-auto-l lh-title mr5-l">
+                            <dd class="f6 fw4 ml0"> Current Time</dd>
+                            <dd class="f3 fw6 ml0" data-time>-----</dd>
                         </dl>
                         <dl class="fl fn-l w-50 dib-l w-auto-l lh-title mr5-l">
                             <dd class="f6 fw4 ml0">Wind Speed</dd>
