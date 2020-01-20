@@ -2,7 +2,7 @@
 const time = document.getElementById("time");
 const greeting = document.getElementById("greeting");
 let background_image = document.getElementById("bg").style.background;
-//const name = document.getElementById("name");
+const name = document.getElementById("name");
 const focus = document.getElementById("focus");
 const quote = document.getElementById("quote");
 const author = document.getElementById("author");
@@ -15,6 +15,7 @@ const temperatureSection = document.querySelector(".temperature");
 const temperatureSpan = document.querySelector(".temperature span");
 const temperatureF = document.querySelector(".degree-section > span");
 const newTime = document.querySelector(".new-time");
+const searchElement = document.querySelector("[data-city-search]");
 
 function defaultValue() {
   document.getElementById("bg").style.background =
@@ -25,8 +26,42 @@ window.onload = defaultValue;
 
 document.addEventListener("DOMContentLoaded", function() {
   // Google API
-  const searchElement = document.querySelector("[data-city-search]");
+  
+//   document.getElementById('name').onkeyup=function(e){
+//     if(e.keyCode==13){
+//       console.log("sigh "+e);
+//         //document.getElementById('mybtn').click();
+//     }
+// }
+
+
+
+//   console.log("Entered main ELtnr")
+//  name.addEventListener('keypress', function(e){
+//     console.log("EEEEE "+e.type)
+//     console.log("EEEEE "+ e.which )
+//     console.log("EEEEE "+e.keyCode)
+//     console.log("EEEEE "+e.keyCode)
+//   })
+
+
   const searchBox = new google.maps.places.SearchBox(searchElement);
+
+  
+ 
+//set focus
+// function setFocus(e) {
+//   if (e.type === "keypress") {
+//     if (e.which === 13 || e.keyCode === 13) {
+//       localStorage.setItem("focus", e.target.innerText);
+//       focus.blur();
+//     }
+//   } else {
+//     localStorage.setItem("focus", e.target.innerText);
+//   }
+// }
+
+
   searchBox.addListener("places_changed", () => {
     const place = searchBox.getPlaces()[0];
 
@@ -53,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function() {
         setWeatherData(data, place.formatted_address);
       });
 
-    searchElement.value = null;
+    //searchElement.value = null;
   });
 
   const icon = new Skycons({ color: "#FFF" });
