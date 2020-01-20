@@ -20,11 +20,13 @@ const searchElement = document.querySelector("[data-city-search]");
 function defaultValue() {
   document.getElementById("bg").style.background =
     "url('./img/sunset_bg.svg') center/cover";
+
+    
 }
 
 window.onload = defaultValue;
 
-document.addEventListener("DOMContentLoaded", function() {
+//document.addEventListener("DOMContentLoaded", function() {
   // Google API
   
 //   document.getElementById('name').onkeyup=function(e){
@@ -33,9 +35,7 @@ document.addEventListener("DOMContentLoaded", function() {
 //         //document.getElementById('mybtn').click();
 //     }
 // }
-
-
-
+//activatePlacesSearch();
 //   console.log("Entered main ELtnr")
 //  name.addEventListener('keypress', function(e){
 //     console.log("EEEEE "+e.type)
@@ -44,8 +44,15 @@ document.addEventListener("DOMContentLoaded", function() {
 //     console.log("EEEEE "+e.keyCode)
 //   })
 
+//function activatePlacesSearch(){
+  
+//let searchElement = document.getElementById('name');
+//const searchBox = new google.maps.places.SearchBox(searchElement);
+const searchBox = new google.maps.places.Autocomplete(searchElement);
 
-  const searchBox = new google.maps.places.SearchBox(searchElement);
+console.log("searchBox"+ searchBox)
+console.log("test")
+  
 
   
  
@@ -62,8 +69,12 @@ document.addEventListener("DOMContentLoaded", function() {
 // }
 
 
-  searchBox.addListener("places_changed", () => {
-    const place = searchBox.getPlaces()[0];
+  google.maps.event.addListener(searchBox,"place_changed", () => {
+  //searchBox.addListener("places_changed", () => {
+    
+    console.log('test2')
+    //const place = searchBox.getPlaces()[0];
+    const place = searchBox.getPlace();
 
     if (place == null) {
       console.log("place is null");
@@ -88,7 +99,7 @@ document.addEventListener("DOMContentLoaded", function() {
         setWeatherData(data, place.formatted_address);
       });
 
-    //searchElement.value = null;
+    searchElement.value = null;
   });
 
   const icon = new Skycons({ color: "#FFF" });
@@ -123,7 +134,7 @@ document.addEventListener("DOMContentLoaded", function() {
     weatherRecipe(data.currently.summary)
 
   }
-
+//}
 
 
 function weatherRecipe(currentWeather) {
@@ -302,7 +313,7 @@ function weatherRecipe(currentWeather) {
 
     document.getElementById("bg").style.background = skyGradient[hour];
   }
-});
+//});
 
 function converTime(localTimeZone) {
   let militaryTime = moment.tz(moment(), localTimeZone).format("h:mm:a");
