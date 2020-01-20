@@ -132,10 +132,35 @@ console.log("test")
     setSkyColor(moment.tz(moment(), data.timezone).format("H"));
      //Build weather condition
     weatherRecipe(data.currently.summary)
-
+    setBuildings()
   }
 //}
 
+function setBuildings(){
+let number = 2; // add random number here 
+  console.log("From buildings:  " + number);
+    let buildings = {
+      1: "./img/chicago.svg",
+      2: "./img/world_3020.svg",
+      3: "./img/miami.svg",
+      4:"./img/buildings.svg"
+    };
+
+
+    console.log(buildings[number])
+    if (
+      typeof buildings[number] === "undefined" &&
+      buildings[number] === null
+    ) {
+      console.log( "Here")
+      document.getElementById("buildings").style.src =
+        "./img/chicago.svg";
+      return;
+    }
+
+    document.getElementById("buildings").src = buildings[number];
+
+}
 
 function weatherRecipe(currentWeather) {
 
