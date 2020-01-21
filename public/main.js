@@ -100,6 +100,7 @@ console.log("test")
       });
 
     searchElement.value = null;
+    document.getElementById("buildings").classList.remove("fade-in");
   });
 
   const icon = new Skycons({ color: "#FFF" });
@@ -137,13 +138,15 @@ console.log("test")
 //}
 
 function setBuildings(){
-let number = 2; // add random number here 
-  console.log("From buildings:  " + number);
+
+let number = Math.ceil(Math.random() * 5); // add random number here 
+  console.log("Building random number is:  " + number);
     let buildings = {
       1: "./img/chicago.svg",
       2: "./img/world_3020.svg",
       3: "./img/miami.svg",
-      4:"./img/buildings.svg"
+      4:"./img/buildings.svg",
+      5:"./img/mountain_1.svg"
     };
 
 
@@ -159,6 +162,8 @@ let number = 2; // add random number here
     }
 
     document.getElementById("buildings").src = buildings[number];
+
+    document.getElementById("buildings").classList.add("fade-in");
 
 }
 
