@@ -15,6 +15,7 @@ app.use(express.static("public"));
 
 app.post("/weather", (req, res) => {
   console.log(req.body);
+  console.log(Math.floor(Math.random() * 3));
   const url = `https://api.darksky.net/forecast/${DARKSKY_API_KEY}/${req.body.latitude},${req.body.longitude}?units=us`;
 
   axios({

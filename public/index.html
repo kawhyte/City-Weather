@@ -10,8 +10,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <script type="text/javascript"
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCupHbdBIWGhHwxkNZdURt3IQCkIE_PiT0&libraries=places"
-    ></script>
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCupHbdBIWGhHwxkNZdURt3IQCkIE_PiT0&libraries=places">
+    </script>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
     <script defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/skycons/1396634940/skycons.min.js">
     </script>
@@ -60,19 +60,19 @@
 
             <div class="fr w-100 w-80-l">
 
-                <div class="degree-section f2 f1-l lh-title mt0 mb4 mb2-ns">
+                <div class="degree-section f2 f1-l lh-title ">
                     <h2 class="temperature-degree" data-temperature>--</h2>
                     <!-- <span>F</span> -->
                     <div class="icon-container">
                         <canvas id="icon" width="100" height="100"></canvas>
                     </div>
-                    <dl class="fl fn-l w-50 dib-l w-auto-l lh-title mr5-l main-location">
-                        <!-- <dd class="f6 fw4 ml0"> Current Location</dd> -->
-                        <dd class="f3 fw6 ml0 " data-location>-----</dd>
-                    </dl>
+
                     <!-- <canvas id="skycon-img" class="icon" width="128" height="128"></canvas> -->
                 </div>
-
+                <dl class="fl fn-l w-50 dib-l w-auto-l lh-title mr5-l ">
+                    <!-- <dd class="f6 fw4 ml0"> Current Location</dd> -->
+                    <dd class="f3 fw6 ml0 main-location " data-location>-----</dd>
+                </dl>
                 <div class=" f4 mt0 mb3 mb2-ns">
                     <div class="cf detail">
 
@@ -107,24 +107,10 @@
             </div>
             <div> <canvas class="snow" id="sky"> </canvas> </div>
             <!-- <canvas class="snow container" id="sky"> </canvas> -->
-            <img id ="buildings" src="/img/buildings.svg" class="db" alt="buildings" />
+            <img id="buildings" src="/img/buildings.svg" class="db" alt="buildings" />
 
         </div>
         <footer class="pv4 ph3 ph5-m ph6-l mid-gray">
-
-            <!-- <div class="pa4">
-                <blockquote class="athelas ml0 mt0 pl4  bl bw2  b--blue" id="quote">
-                    <p class="f5 f4-m f3-l lh-copy measure mt0">
-                        Discipline in typography is a prime virtue. Individuality
-                        must be secured by means that are rational. Distinction
-                        needs to be won by simplicity and restraint. It is equally
-                        true that these qualities need to be infused wiht a
-                        certain spirit and vitality, or they degenerate into
-                        dullness and mediocrity.
-                    </p>
-                </blockquote>
-                <cite class="f6 ttu tracked fs-normal" id="author">―Stanley Morison</cite>
-            </div> -->
 
 
             <small class="f6 db tc"><b class="ttu">City Weather App</small>
@@ -146,8 +132,6 @@
     <script
         src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.23/moment-timezone-with-data-2012-2022.min.js">
     </script>
-
-    <!-- <script src="js/snow.js" async defer></script> -->
 
 </body>
 

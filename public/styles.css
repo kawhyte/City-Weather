@@ -63,7 +63,12 @@ body {
 
 .main-location{
 
-    padding-left: 30px;
+    /* padding-left: 27px; */
+    display: block;
+    width: 500px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .degree-section {
