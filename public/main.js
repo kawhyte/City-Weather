@@ -115,7 +115,7 @@ console.log("test")
 
   function setWeatherData(data, place) {
     locationElement.textContent = place;
-    temperatureElement.textContent = data.currently.temperature;
+    temperatureElement.textContent = Math.floor(data.currently.temperature) + "°";
     precipitationElement.textContent = `${data.currently.precipProbability *
       100}%`;
     windElement.textContent = data.currently.windSpeed;

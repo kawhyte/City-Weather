@@ -1,5 +1,6 @@
 body {
-    font-family: Helvetica, Arial, sans-serif;
+    /* font-family: Helvetica, Arial, sans-serif; */
+    font-family: 'Open Sans', sans-serif;
     -webkit-font-smoothing: antialiased;
     background: black;
     color: rgb(255, 255, 255);
@@ -56,11 +57,14 @@ body {
 }
 
 #skycon-img {
-    width: 8%;
+    width: 2%;
     
 }
 
+.main-location{
 
+    padding-left: 30px;
+}
 
 .degree-section {
     display: flex;

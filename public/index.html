@@ -12,7 +12,7 @@
     <script type="text/javascript"
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCupHbdBIWGhHwxkNZdURt3IQCkIE_PiT0&libraries=places"
     ></script>
-
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
     <script defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/skycons/1396634940/skycons.min.js">
     </script>
 
@@ -26,7 +26,7 @@
     <header>
         <div class="location">
             <h2 class="f2 f1-m  measure-narrow  mv0 center">
-                <span class="md-yellow-90  lh-copy white pa2 tracked-tight">
+                <span class="md-yellow-90  lh-copy white pa2 ">
                     City Weather
                 </span>
             </h2>
@@ -66,21 +66,24 @@
                     <div class="icon-container">
                         <canvas id="icon" width="100" height="100"></canvas>
                     </div>
+                    <dl class="fl fn-l w-50 dib-l w-auto-l lh-title mr5-l main-location">
+                        <!-- <dd class="f6 fw4 ml0"> Current Location</dd> -->
+                        <dd class="f3 fw6 ml0 " data-location>-----</dd>
+                    </dl>
                     <!-- <canvas id="skycon-img" class="icon" width="128" height="128"></canvas> -->
                 </div>
 
                 <div class=" f4 mt0 mb3 mb2-ns">
-
                     <div class="cf detail">
 
                         <dl class="fl fn-l w-50 dib-l w-auto-l lh-title mr5-l">
                             <dd class="f6 fw4 ml0"> Status</dd>
                             <dd class="f3 fw6 ml0" data-status>-----</dd>
                         </dl>
-                        <dl class="fl fn-l w-50 dib-l w-auto-l lh-title mr5-l">
+                        <!-- <dl class="fl fn-l w-50 dib-l w-auto-l lh-title mr5-l">
                             <dd class="f6 fw4 ml0"> Current Location</dd>
                             <dd class="f3 fw6 ml0" data-location>-----</dd>
-                        </dl>
+                        </dl> -->
                         <dl class="fl fn-l w-50 dib-l w-auto-l lh-title mr5-l">
                             <dd class="f6 fw4 ml0">Local Time</dd>
                             <dd class="f3 fw6 ml0" data-time>-----</dd>
