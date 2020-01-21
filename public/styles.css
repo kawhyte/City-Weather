@@ -69,6 +69,7 @@ body {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    text-shadow:lightgray 1px 0 1px;
 }
 
 .degree-section {
@@ -127,12 +128,17 @@ body {
 .temperature-decription {
 
     margin-top: 20px;
+    text-shadow:lightgray 1px 0 1px;
 
 }
 
 .temperature-degree {
     margin-right: 20px;
+    text-shadow:lightgray 1px 0 1px;
 
+}
+#icon{
+  text-shadow:lightgray 1px 0 1px;
 }
 
 .snow {

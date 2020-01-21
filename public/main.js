@@ -172,7 +172,7 @@ function weatherRecipe(currentWeather) {
  if (wordInString(currentWeather, "snow")) {
   letItSnow();
   //setInterval(drawFlakes, 30);
-} else if (wordInString(currentWeather, "rain")) {
+} else if (wordInString(currentWeather, "rain")|| wordInString(currentWeather, "drizzle")) {
   makeItRain();
 } else if (wordInString(currentWeather, "sunny")) {
   //makeItRain();
@@ -312,13 +312,13 @@ function weatherRecipe(currentWeather) {
       6: "linear-gradient(to bottom, #4a4969 0%,#7072ab 50%,#cd82a0 100%)",
       7: "linear-gradient(to bottom, #757abf 0%,#8583be 60%,#eab0d1 100%)",
       8: "linear-gradient(to bottom, #82addb 0%,#ebb2b1 100%)",
-      9: "linear-gradient(to bottom, #94c5f8 1%,#a6e6ff 70%,#b1b5ea 100%)",
+      9: "linear-gradient(to bottom, #38c5fc 1%,#a6e6ff 70%,#b1b5ea 100%)",
       10: "linear-gradient(to bottom, #b7eaff 0%,#94dfff 100%)",
-      11: "linear-gradient(to bottom, #90dffe 0%,#38a3d1 100%)",
-      13: "linear-gradient(to bottom, #57c1eb 0%,#246fa8 100%)",
-      14: "linear-gradient(to bottom, #2d91c2 0%,#1e528e 100%)",
-      15: "linear-gradient(to bottom, #2473ab 0%,#1e528e 70%,#5b7983 100%)",
-      16: "linear-gradient(to bottom, #1e528e 0%,#265889 50%,#9da671 100%)",
+      11: "linear-gradient(to bottom, #38c5fc 0%,#38a3d1 100%)",
+      13: "linear-gradient(to bottom, #38c5fc 0%,#246fa8 100%)",
+      14: "linear-gradient(to bottom, #38c5fc 0%,#1e528e 100%)",
+      15: "linear-gradient(to bottom, #0096d1 0%,#1e528e 70%,#5b7983 100%)",
+      16: "linear-gradient(to bottom, #0096d1 0%,#265889 50%,#9da671 100%)",
       17: "linear-gradient(to bottom, #1e528e 0%,#728a7c 50%,#e9ce5d 100%)",
       18: "linear-gradient(to bottom, #154277 0%,#576e71 30%,#e1c45e 70%,#b26339 100%)",
       19: "linear-gradient(to bottom, #163C52 0%,#4F4F47 30%,#C5752D 60%,#B7490F 80%, #2F1107 100%",
